@@ -14,7 +14,6 @@
 #define MAX_INPUT 10000
 pthread_mutex_t timer_lock = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
-//int sender = 1;
 
 
 //quick exit program
@@ -418,7 +417,7 @@ void run_node(char **argv)
                     pthread_cancel(threads[seq_num_sent % window_size]);
                 timer_conds_array[seq_num_sent % window_size] = 0;
                 t_params[seq_num_sent % window_size].seq_num = seq_num_sent;
-                pthread_create(&threads[seq_num_sent % window_size], NULL, timer_thread, &t_params[seq_num_sent % window_size]); // receiver thread
+                pthread_create(&threads[seq_num_sent % window_size], NULL, timer_thread, &t_params[seq_num_sent % window_size]); // timer thread
                 usleep(1000); // adjust for timeout race condition
                 seq_num_sent++;
             }
